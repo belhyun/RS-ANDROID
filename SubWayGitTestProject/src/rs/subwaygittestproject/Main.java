@@ -18,7 +18,7 @@ public class Main extends Activity {
 
 					@Override
 					public void onClick(View arg0) {
-						Toast.makeText(getBaseContext(), "!!",
+						Toast.makeText(getBaseContext(), "!!???",
 								Toast.LENGTH_SHORT).show();
 
 					}
