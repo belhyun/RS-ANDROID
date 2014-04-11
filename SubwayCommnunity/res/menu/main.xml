@@ -4,9 +4,21 @@
     tools:context="team.subwaycommnunity.Main" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:id="@+id/menuHistory"
+        android:orderInCategory="1"
+        android:title="History"
+        app:showAsAction="ifRoom"/>
+    
+    <item
+        android:id="@+id/menuSetting"
+        android:orderInCategory="1"
+        android:title="설정"
+        app:showAsAction="never"/>
+    
+    <item
+        android:id="@+id/menuHelp"
+        android:orderInCategory="1"
+        android:title="도움말"
         app:showAsAction="never"/>
 
 </menu>
