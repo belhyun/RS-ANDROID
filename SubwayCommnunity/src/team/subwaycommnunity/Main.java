@@ -74,7 +74,7 @@ public class Main extends ActionBarActivity {
 
 		switch (item.getItemId()) {
 		case R.id.menuHistory:
-			
+			startActivity(new Intent(this, team.menuactivities.JasonTest.class));
 			return true;
 		case R.id.menuSetting:
 			startActivity(new Intent(this, team.menuactivities.MenuSetting.class));
