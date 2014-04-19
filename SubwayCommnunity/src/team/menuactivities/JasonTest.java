@@ -50,7 +50,7 @@ public class JasonTest extends Activity {
 
 			}
 		});
-//jkljkljk
-	}//
+
+	}
 
 }
