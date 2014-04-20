@@ -2,10 +2,12 @@ package team.subwaycommnunity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class Main extends ActionBarActivity {
 
@@ -13,7 +15,11 @@ public class Main extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		setActionTab(savedInstanceState);
 
+	}
+
+	private void setActionTab(Bundle savedInstanceState) {
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
@@ -77,15 +83,38 @@ public class Main extends ActionBarActivity {
 			startActivity(new Intent(this, team.menuactivities.JasonTest.class));
 			return true;
 		case R.id.menuSetting:
-			startActivity(new Intent(this, team.menuactivities.MenuSetting.class));
+			startActivity(new Intent(this,
+					team.menuactivities.MenuSetting.class));
 			return true;
 		case R.id.menuHelp:
-			
+
 			return true;
 
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	boolean doubleBackToExitPressedOnce = false;
+	
+	@Override
+	public void onBackPressed() {
+		if (doubleBackToExitPressedOnce) {
+			super.onBackPressed();
+			return;
+		}
+
+		this.doubleBackToExitPressedOnce = true;
+		Toast.makeText(this, "뒤로가기 버튼을 두 번 누르면 종료됩니다",
+				Toast.LENGTH_SHORT).show();
+
+		new Handler().postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				doubleBackToExitPressedOnce = false;
+			}
+		}, 1000);
 	}
 
 }
