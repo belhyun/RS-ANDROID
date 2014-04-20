@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
-import android.widget.Toast;
 
 public class ActionBarTabListener<T extends Fragment> extends FragmentActivity
 		implements ActionBar.TabListener {
@@ -33,7 +32,7 @@ public class ActionBarTabListener<T extends Fragment> extends FragmentActivity
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction fragmentTransaction) {
-		Toast.makeText(mActivity, "다시선택됨",Toast.LENGTH_SHORT).show();
+//		Toast.makeText(mActivity, "다시선택됨",Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

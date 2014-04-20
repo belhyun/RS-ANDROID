@@ -1,13 +1,14 @@
 package team.subwaycommnunity;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class FragmentHome extends Fragment {
 
@@ -39,17 +40,19 @@ public class FragmentHome extends Fragment {
 				.findViewById(R.id.homeEasyTwitterBtn);
 		mHomeDeviceAppBtn = (Button) myView.findViewById(R.id.homeDeviceAppBtn);
 
+		// 사이즈
 		myView.getViewTreeObserver().addOnGlobalLayoutListener(
 				new ViewTreeObserver.OnGlobalLayoutListener() {
 
 					@Override
 					public void onGlobalLayout() {
 
-						mHomeSubwayCommunityBtn.setHeight(myView.getHeight()*2/7);
-						mHomeEventWebBtn.setWidth(myView.getWidth()/3);
-						mHomeEventWebBtn.setHeight(myView.getHeight()*2/7);
-						mHomeEasyTwitterBtn.setWidth(myView.getWidth()/3);
-						mHomeDeviceAppBtn.setHeight(myView.getHeight()*2/7);
+						mHomeSubwayCommunityBtn.setHeight(myView.getHeight() * 2 / 7);
+						mHomeEventWebBtn.setWidth(myView.getWidth() / 3);
+						mHomeEventWebBtn.setHeight(myView.getHeight() * 2 / 7);
+						mHomeEasyTwitterBtn.setWidth(myView.getWidth() / 3);
+						mHomeDeviceAppBtn.setHeight(myView.getHeight() * 2 / 7);
+
 					}
 				});
 
@@ -59,9 +62,8 @@ public class FragmentHome extends Fragment {
 
 					@Override
 					public void onClick(View v) {
-						Toast.makeText(getActivity(), "?!", Toast.LENGTH_SHORT)
-								.show();
 					}
+
 				});
 		/* 버튼 리스너 */
 		mHomeEventWebBtn.setOnClickListener(new Button.OnClickListener() {
