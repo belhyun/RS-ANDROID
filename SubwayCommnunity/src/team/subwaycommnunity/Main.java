@@ -16,6 +16,8 @@ public class Main extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setActionTab(savedInstanceState);
+		
+		
 
 	}
 
@@ -39,14 +41,14 @@ public class Main extends ActionBarActivity {
 				.newTab()
 				.setText("이벤트웹")
 				.setTabListener(
-						new ActionBarTabListener<FragmentEventWeb>(this,
-								"event", FragmentEventWeb.class)));
+						new ActionBarTabListener<FragmentWeb>(this,
+								"event", FragmentWeb.class)));
 		actionBar.addTab(actionBar
 				.newTab()
 				.setText("이지트위터")
 				.setTabListener(
-						new ActionBarTabListener<FragmentEasyWeb>(this, "easy",
-								FragmentEasyWeb.class)));
+						new ActionBarTabListener<FragmentWeb>(this, "easy",
+								FragmentWeb.class)));
 		actionBar.addTab(actionBar
 				.newTab()
 				.setText("바로가기")

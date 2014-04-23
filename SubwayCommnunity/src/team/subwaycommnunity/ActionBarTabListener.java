@@ -32,7 +32,7 @@ public class ActionBarTabListener<T extends Fragment> extends FragmentActivity
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction fragmentTransaction) {
-//		Toast.makeText(mActivity, "다시선택됨",Toast.LENGTH_SHORT).show();
+
 	}
 
 	@Override
