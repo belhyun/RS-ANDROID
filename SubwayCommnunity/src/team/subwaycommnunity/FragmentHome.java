@@ -60,6 +60,9 @@ public class FragmentHome extends Fragment {
 
 					@Override
 					public void onClick(View v) {
+						
+						Main.actionBar.setSelectedNavigationItem(1);
+						
 					}
 
 				});
@@ -69,6 +72,7 @@ public class FragmentHome extends Fragment {
 			@Override
 			public void onClick(View v) {
 
+				Main.actionBar.setSelectedNavigationItem(2);
 			}
 		});
 		/* 버튼 리스너 */
@@ -77,6 +81,7 @@ public class FragmentHome extends Fragment {
 			@Override
 			public void onClick(View v) {
 
+				Main.actionBar.setSelectedNavigationItem(3);
 			}
 		});
 		/* 버튼 리스너 */
@@ -85,6 +90,7 @@ public class FragmentHome extends Fragment {
 			@Override
 			public void onClick(View v) {
 
+				Main.actionBar.setSelectedNavigationItem(4);
 			}
 		});
 

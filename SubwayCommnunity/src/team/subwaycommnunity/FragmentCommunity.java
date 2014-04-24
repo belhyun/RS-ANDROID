@@ -2,36 +2,25 @@ package team.subwaycommnunity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class FragmentCommunity extends Fragment {
-
-	public LinearLayout mSelectRegionContainer;
-	public LinearLayout mSelectLineContainer;
-	public LinearLayout mFavoriteContainer;
-	private Button[] mFavoriteBtns;
-	private Button mAddBtn;
-	private int mFavoriteCnt;
-
-	private OnClickListener mFavoriteBtnOCL = new Button.OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			/* 게시판으로 고고!! */
-
-		}
-	};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater
-				.inflate(R.layout.fragment_community, container, false);
+		View v = inflater.inflate(R.layout.fragment_community_container,
+				container, false);
 		return v;
 	}
 
@@ -39,45 +28,117 @@ public class FragmentCommunity extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		mFavoriteCnt = 5;
-		mFavoriteContainer = (LinearLayout) getView().findViewById(
-				R.id.communityFavorites);
-		mSelectRegionContainer = (LinearLayout) getView().findViewById(
-				R.id.communitySelectRegion);
-		mSelectLineContainer = (LinearLayout) getView().findViewById(
-				R.id.communitySelectLine);
+		FragmentTransaction transaction = getFragmentManager()
+				.beginTransaction();
+		transaction.add(R.id.communityContainer, new FragmentFravorites());
+		transaction.commit();
 
-		mFavoriteBtns = new Button[mFavoriteCnt];
-		mAddBtn = new Button(getActivity());
+	}
+	// 다른 탭 갔다가 다시 오면 기존 레이아웃 중복 생성 되는 문제 있음.
+	
 
-		/*
-		 * 여기에 통신모듈!
-		 */
+	public static class FragmentFravorites extends Fragment {
 
-		for (int i = 0; i < mFavoriteCnt; i++) {
-			mFavoriteBtns[i] = new Button(getActivity());
-			mFavoriteBtns[i].setText("즐겨찾기 " + (i + 1));
-			mFavoriteBtns[i].setGravity(Gravity.CENTER);
-			mFavoriteBtns[i].setOnClickListener(mFavoriteBtnOCL);
-			mFavoriteContainer.addView(mFavoriteBtns[i]);
+		LinearLayout mLinearLayout;
+		int mCount;
+		Button[] mFavoriteButtons;
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+
+			return inflater.inflate(R.layout.fragment_community_favorites,
+					container, false);
+		}
+
+		@Override
+		public void onActivityCreated(Bundle savedInstanceState) {
+			super.onActivityCreated(savedInstanceState);
+
+			mLinearLayout = (LinearLayout) getView().findViewById(
+					R.id.communityFavorites);
+			mCount = 8;
+			setFavoritesBtns(getActivity(), mLinearLayout, mCount);
+			Button lmAddBtn = new Button(getActivity());
+			lmAddBtn.setText("+");
+			lmAddBtn.setGravity(Gravity.CENTER);
+			lmAddBtn.setOnClickListener(AddOCL);
+			mLinearLayout.addView(lmAddBtn);
+		}
+
+		void setFavoritesBtns(FragmentActivity fAct, LinearLayout layout,
+				int count) {
+			mFavoriteButtons = new Button[count];
+			for (int i = 0; i < count; i++) {
+				mFavoriteButtons[i] = new Button(fAct);
+				mFavoriteButtons[i].setText("즐겨찾기" + (i + 1));
+				mFavoriteButtons[i].setGravity(Gravity.CENTER);
+				layout.addView(mFavoriteButtons[i]);
+				mFavoriteButtons[i].setOnClickListener(OCL);
+				mFavoriteButtons[i].setOnLongClickListener(LOCL);
+			}
 
 		}
 
-		mAddBtn.setText("+");
-		mAddBtn.setGravity(Gravity.CENTER);
-		mFavoriteContainer.addView(mAddBtn);
-		mAddBtn.setOnClickListener(new Button.OnClickListener() {
+		private OnClickListener AddOCL = new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				FragmentTransaction transaction = getFragmentManager()
+						.beginTransaction();
+				transaction.replace(R.id.communityContainer,
+						new FragmentRegion());
+				transaction.addToBackStack(null);
+				transaction.commit();
+
+			}
+		};
+
+		private OnLongClickListener LOCL = new OnLongClickListener() {
+
+			@Override
+			public boolean onLongClick(View v) {
+
+				Toast.makeText(getActivity(),
+						((Button) v).getText().toString() + "LongClicked",
+						Toast.LENGTH_SHORT).show();
+
+				return true;
+			}
+		};
+		private OnClickListener OCL = new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
 
-				mFavoriteContainer.setVisibility(LinearLayout.GONE);
-				mSelectRegionContainer.setVisibility(LinearLayout.VISIBLE);
-
-				// 여기는 레이아웃 겹치는걸루 가실게요~!
+				Toast.makeText(getActivity(),
+						((Button) v).getText().toString(), Toast.LENGTH_SHORT)
+						.show();
 
 			}
-		});
+		};
 
+	}
+
+	public static class FragmentRegion extends Fragment {
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+
+			return inflater.inflate(R.layout.fragment_community_region,
+					container, false);
+		}
+
+	}
+
+	public static class FragmentLine extends Fragment {
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+
+			return inflater.inflate(R.layout.fragment_community_line,
+					container, false);
+		}
 	}
 
 }

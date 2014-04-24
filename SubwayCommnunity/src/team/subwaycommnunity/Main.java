@@ -11,18 +11,18 @@ import android.widget.Toast;
 
 public class Main extends ActionBarActivity {
 
+	static ActionBar actionBar;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setActionTab(savedInstanceState);
-		
-		
 
 	}
 
-	private void setActionTab(Bundle savedInstanceState) {
-		final ActionBar actionBar = getSupportActionBar();
+	void setActionTab(Bundle savedInstanceState) {
+		actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		actionBar.addTab(actionBar
@@ -41,8 +41,8 @@ public class Main extends ActionBarActivity {
 				.newTab()
 				.setText("이벤트웹")
 				.setTabListener(
-						new ActionBarTabListener<FragmentWeb>(this,
-								"event", FragmentWeb.class)));
+						new ActionBarTabListener<FragmentWeb>(this, "event",
+								FragmentWeb.class)));
 		actionBar.addTab(actionBar
 				.newTab()
 				.setText("이지트위터")
@@ -98,17 +98,18 @@ public class Main extends ActionBarActivity {
 	}
 
 	boolean doubleBackToExitPressedOnce = false;
-	
+
 	@Override
 	public void onBackPressed() {
-		if (doubleBackToExitPressedOnce) {
+		if (doubleBackToExitPressedOnce
+				|| getSupportFragmentManager().getBackStackEntryCount() != 0) {
 			super.onBackPressed();
 			return;
 		}
 
 		this.doubleBackToExitPressedOnce = true;
-		Toast.makeText(this, "뒤로가기 버튼을 두 번 누르면 종료됩니다",
-				Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "뒤로가기 버튼을 두 번 누르면 종료됩니다", Toast.LENGTH_SHORT)
+				.show();
 
 		new Handler().postDelayed(new Runnable() {
 
@@ -116,7 +117,7 @@ public class Main extends ActionBarActivity {
 			public void run() {
 				doubleBackToExitPressedOnce = false;
 			}
-		}, 1000);
+		}, 2000);
 	}
 
 }
