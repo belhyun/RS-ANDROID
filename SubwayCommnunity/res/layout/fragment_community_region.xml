@@ -7,33 +7,43 @@
     android:padding="10dp" >
 
     <Button
-        android:id="@+id/selectSeoul"
+        android:id="@+id/regionSeoul"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="서울" />
+        android:tag="seoul"
+        android:text="서울"
+        android:textColor="#ffffff" />
 
     <Button
-        android:id="@+id/selectBusan"
+        android:id="@+id/regionBusan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="부산" />
+        android:tag="busan"
+        android:text="부산"
+        android:textColor="#ffffff" />
 
     <Button
-        android:id="@+id/selectDaegu"
+        android:id="@+id/regionDaegu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="대구" />
+        android:tag="daegu"
+        android:text="대구"
+        android:textColor="#ffffff" />
 
     <Button
-        android:id="@+id/selectGwangju"
+        android:id="@+id/regionGwangju"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="광주" />
+        android:tag="gwangju"
+        android:text="광주"
+        android:textColor="#ffffff" />
 
     <Button
-        android:id="@+id/selectDaejeon"
+        android:id="@+id/regionDaejeon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="대전" />
+        android:tag="daejeon"
+        android:text="대전"
+        android:textColor="#ffffff" />
 
 </LinearLayout>

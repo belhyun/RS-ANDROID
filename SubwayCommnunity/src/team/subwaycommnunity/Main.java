@@ -108,7 +108,7 @@ public class Main extends ActionBarActivity {
 		}
 
 		this.doubleBackToExitPressedOnce = true;
-		Toast.makeText(this, "뒤로가기 버튼을 두 번 누르면 종료됩니다", Toast.LENGTH_SHORT)
+		Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르시면, 앱이 종료됩니다", Toast.LENGTH_SHORT)
 				.show();
 
 		new Handler().postDelayed(new Runnable() {

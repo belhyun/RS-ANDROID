@@ -12,6 +12,7 @@ public class ActionBarTabListener<T extends Fragment> extends FragmentActivity
 	private final String mTag;
 	private final Class<T> mClass;
 	private Fragment mFragment;
+	
 
 	public ActionBarTabListener(FragmentActivity activity, String tag,
 			Class<T> clz) {
@@ -21,6 +22,7 @@ public class ActionBarTabListener<T extends Fragment> extends FragmentActivity
 
 		mFragment = mActivity.getSupportFragmentManager().findFragmentByTag(
 				mTag);
+		
 		if (mFragment != null && !mFragment.isDetached()) {
 			FragmentTransaction fragmentTransaction = mActivity
 					.getSupportFragmentManager().beginTransaction();
@@ -33,6 +35,9 @@ public class ActionBarTabListener<T extends Fragment> extends FragmentActivity
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction fragmentTransaction) {
 
+		// 여기도 해줘야겠습니다. 아직 미구현~_~
+		
+		
 	}
 
 	@Override

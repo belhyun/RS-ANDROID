@@ -27,7 +27,13 @@ public class FragmentWeb extends Fragment {
 		return v;
 	}
 	
-
+/**
+ * 
+ * easyTwitter 좌우 스크롤링 막기 위해서 스케일링 다시 해줘야할 듯 싶네용~!!
+ * 
+ */
+	
+	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
