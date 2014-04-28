@@ -1,5 +1,7 @@
 package team.subwaycommnunity;
 
+import team.serverdata.JSONsfromServer.SubWayLine;
+import team.serverdata.JSONsfromServer.SubWayRegion;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -99,7 +101,7 @@ public class FragmentCommunity extends Fragment {
 
 		private OnClickListener AddOCL = new OnClickListener() {
 
-//			boolean session = false;
+			// boolean session = false;
 
 			@Override
 			public void onClick(View v) {
@@ -113,9 +115,9 @@ public class FragmentCommunity extends Fragment {
 				transaction.addToBackStack(null);
 				transaction.commit();
 
-				getActivity().startActivityForResult((
-						new Intent(getActivity(),
-								team.account.LoginActivity.class)),10011);
+				getActivity().startActivityForResult(
+						(new Intent(getActivity(),
+								team.account.LoginActivity.class)), 10011);
 
 			}
 		};
@@ -153,11 +155,11 @@ public class FragmentCommunity extends Fragment {
 
 	public static class FragmentRegion extends Fragment {
 
-		Button mSeoulBtn;
-		Button mPusanBtn;
-		Button mDaeguBtn;
-		Button mGwangjuBtn;
-		Button mDaejeonBtn;
+		// Button mSeoulBtn;
+		// Button mPusanBtn;
+		// Button mDaeguBtn;
+		// Button mGwangjuBtn;
+		// Button mDaejeonBtn;
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -174,36 +176,80 @@ public class FragmentCommunity extends Fragment {
 
 		}
 
+		Button[] mActiveBtns;
+		LinearLayout mLayout;
+
 		void setButtons() {
+
+			mLayout = (LinearLayout) getView().findViewById(
+					R.id.communitySelectRegion);
 			LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.MATCH_PARENT,
 					LinearLayout.LayoutParams.WRAP_CONTENT);
 			param.weight = 1;
 			param.bottomMargin = 10;
 
-			mSeoulBtn = (Button) getView().findViewById(R.id.regionSeoul);
-			mPusanBtn = (Button) getView().findViewById(R.id.regionBusan);
-			mDaeguBtn = (Button) getView().findViewById(R.id.regionDaegu);
-			mGwangjuBtn = (Button) getView().findViewById(R.id.regionGwangju);
-			mDaejeonBtn = (Button) getView().findViewById(R.id.regionDaejeon);
+			int len = SubWayRegion.mRegionName.length;
+			if (len < 5) {
+				mActiveBtns = new Button[5];
+			} else {
+				mActiveBtns = new Button[len];
+			}
 
-			mSeoulBtn.setLayoutParams(param);
-			mPusanBtn.setLayoutParams(param);
-			mDaeguBtn.setLayoutParams(param);
-			mGwangjuBtn.setLayoutParams(param);
-			mDaejeonBtn.setLayoutParams(param);
+			for (int i = 0; i < len; i++) {
+				mActiveBtns[i] = new Button(getActivity());
+				mActiveBtns[i].setLayoutParams(param);
+				mActiveBtns[i].setBackgroundResource(R.drawable.roundedbtn);
+				mActiveBtns[i].setOnClickListener(OCL);
+				mActiveBtns[i].setGravity(Gravity.CENTER);
+				mActiveBtns[i].setText(SubWayRegion.mRegionName[i]);
+				mActiveBtns[i].setTextColor(Color.parseColor("#ffffff"));
+				mActiveBtns[i].setTag(SubWayRegion.mRegionName[i]);
+				mLayout.addView(mActiveBtns[i]);
 
-			mSeoulBtn.setBackgroundResource(R.drawable.roundedbtn);
-			mPusanBtn.setBackgroundResource(R.drawable.roundedbtn);
-			mDaeguBtn.setBackgroundResource(R.drawable.roundedbtn);
-			mGwangjuBtn.setBackgroundResource(R.drawable.roundedbtn);
-			mDaejeonBtn.setBackgroundResource(R.drawable.roundedbtn);
+			}
 
-			mSeoulBtn.setOnClickListener(OCL);
-			mPusanBtn.setOnClickListener(OCL);
-			mDaeguBtn.setOnClickListener(OCL);
-			mGwangjuBtn.setOnClickListener(OCL);
-			mDaejeonBtn.setOnClickListener(OCL);
+			if (len < 5) {
+				for (int i = 5 - len - 1; i < 5; i++) {
+
+					mActiveBtns[i] = new Button(getActivity());
+					mActiveBtns[i].setLayoutParams(param);
+					mActiveBtns[i].setBackgroundResource(R.drawable.roundedbtn);
+					mActiveBtns[i].setOnClickListener(OCL);
+					mActiveBtns[i].setGravity(Gravity.CENTER);
+					mActiveBtns[i].setText("준비중입니다");
+					mActiveBtns[i].setTextColor(Color.parseColor("#ffffff"));
+					mActiveBtns[i].setTag("준비중");
+					mLayout.addView(mActiveBtns[i]);
+
+				}
+			}
+
+			// mSeoulBtn = (Button) getView().findViewById(R.id.regionSeoul);
+			// mPusanBtn = (Button) getView().findViewById(R.id.regionBusan);
+			// mDaeguBtn = (Button) getView().findViewById(R.id.regionDaegu);
+			// mGwangjuBtn = (Button)
+			// getView().findViewById(R.id.regionGwangju);
+			// mDaejeonBtn = (Button)
+			// getView().findViewById(R.id.regionDaejeon);
+			//
+			// mSeoulBtn.setLayoutParams(param);
+			// mPusanBtn.setLayoutParams(param);
+			// mDaeguBtn.setLayoutParams(param);
+			// mGwangjuBtn.setLayoutParams(param);
+			// mDaejeonBtn.setLayoutParams(param);
+			//
+			// mSeoulBtn.setBackgroundResource(R.drawable.roundedbtn);
+			// mPusanBtn.setBackgroundResource(R.drawable.roundedbtn);
+			// mDaeguBtn.setBackgroundResource(R.drawable.roundedbtn);
+			// mGwangjuBtn.setBackgroundResource(R.drawable.roundedbtn);
+			// mDaejeonBtn.setBackgroundResource(R.drawable.roundedbtn);
+			//
+			// mSeoulBtn.setOnClickListener(OCL);
+			// mPusanBtn.setOnClickListener(OCL);
+			// mDaeguBtn.setOnClickListener(OCL);
+			// mGwangjuBtn.setOnClickListener(OCL);
+			// mDaejeonBtn.setOnClickListener(OCL);
 
 		}
 
@@ -211,24 +257,33 @@ public class FragmentCommunity extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				switch (v.getId()) {
-				case R.id.regionSeoul:
-					FragmentTransactions(v);
-					break;
-				case R.id.regionBusan:
-					FragmentTransactions(v);
-					break;
-				case R.id.regionDaegu:
-					FragmentTransactions(v);
-					break;
-				case R.id.regionGwangju:
-					FragmentTransactions(v);
-					break;
-				case R.id.regionDaejeon:
-					FragmentTransactions(v);
-					break;
 
+				String k = (String) ((Button) v).getTag();
+				for (int i = 0; i < SubWayRegion.mRegionName.length; i++) {
+					if (k.endsWith(SubWayRegion.mRegionName[i])) {
+						FragmentTransactions(v);
+						return;
+					}
 				}
+
+				// switch (v.getId()) {
+				// case R.id.regionSeoul:
+				// FragmentTransactions(v);
+				// break;
+				// case R.id.regionBusan:
+				// FragmentTransactions(v);
+				// break;
+				// case R.id.regionDaegu:
+				// FragmentTransactions(v);
+				// break;
+				// case R.id.regionGwangju:
+				// FragmentTransactions(v);
+				// break;
+				// case R.id.regionDaejeon:
+				// FragmentTransactions(v);
+				// break;
+				//
+				// }
 
 			}
 		};
@@ -252,95 +307,35 @@ public class FragmentCommunity extends Fragment {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 
-			if (getTag().compareTo("seoul") == 0) {
-				return inflater.inflate(R.layout.fragment_community_line,
-						container, false);
-			} else if (getTag().compareTo("busan") == 0) {
-				return inflater.inflate(R.layout.fragment_community_line,
-						container, false);
-
-			} else if (getTag().compareTo("daegu") == 0) {
-				return inflater.inflate(R.layout.fragment_community_line,
-						container, false);
-
-			} else if (getTag().compareTo("gwangju") == 0) {
-				return inflater.inflate(R.layout.fragment_community_line,
-						container, false);
-
-			} else if (getTag().compareTo("daejeon") == 0) {
-				return inflater.inflate(R.layout.fragment_community_line,
-						container, false);
-
-			} else {
-				return inflater.inflate(R.layout.fragment_community_line,
-						container, false);
-			}
+			return inflater.inflate(R.layout.fragment_community_line,
+					container, false);
 
 		}
 
-		String[] mStrSeoulLine = { "1호선", "2호선", "3호선", "4호선", "5호선", "6호선",
-				"7호선", "8호선", "9호선", "수인선", "경춘선", "경의선", "중앙선", "의정부", "분당선",
-				"신분당", "공항", "인천", "에버라인" };
-		String[] mStrBusanLine = { "1호선", "2호선", "3호선", "4호선", "부산-김해경전철" };
-		String[] mStrDaeguLine = { "1호선", "2호선" };
-		String[] mStrGwangjuLine = { "1호선" };
-		String[] mStrDaejeonLine = { "1호선" };
+		/*
+		 * String[] mStrSeoulLine = { "1호선", "2호선", "3호선", "4호선", "5호선", "6호선",
+		 * "7호선", "8호선", "9호선", "수인선", "경춘선", "경의선", "중앙선", "의정부", "분당선", "신분당",
+		 * "공항", "인천", "에버라인" }; String[] mStrBusanLine = { "1호선", "2호선", "3호선",
+		 * "4호선", "부산-김해경전철" }; String[] mStrDaeguLine = { "1호선", "2호선" };
+		 * String[] mStrGwangjuLine = { "1호선" }; String[] mStrDaejeonLine = {
+		 * "1호선" };
+		 */
 
 		@Override
 		public void onActivityCreated(Bundle savedInstanceState) {
 			super.onActivityCreated(savedInstanceState);
 
-			if (getTag().compareTo("seoul") == 0) {
-				setLineListView(mStrSeoulLine);
-			} else if (getTag().compareTo("busan") == 0) {
-				setLineListView(mStrBusanLine);
-			} else if (getTag().compareTo("daegu") == 0) {
-				setLineListView(mStrDaeguLine);
-			} else if (getTag().compareTo("gwangju") == 0) {
-				setLineListView(mStrGwangjuLine);
-			} else if (getTag().compareTo("daejeon") == 0) {
-				setLineListView(mStrDaejeonLine);
+			if (getTag().compareTo("서울") == 0) {
+				setLineListView(SubWayLine.mLine.get("서울"));
+			} else if (getTag().compareTo("부산") == 0) {
+				setLineListView(SubWayLine.mLine.get("부산"));
+			} else if (getTag().compareTo("대구") == 0) {
+				setLineListView(SubWayLine.mLine.get("대구"));
+			} else if (getTag().compareTo("광주") == 0) {
+				setLineListView(SubWayLine.mLine.get("광주"));
+			} else if (getTag().compareTo("대전") == 0) {
+				setLineListView(SubWayLine.mLine.get("대전"));
 			}
-
-			// 이건 급한 불 끄고 나서 나중에...;;
-			// if (getTag().compareTo("seoul") == 0) {
-			// LinearLayout l = (LinearLayout) getView().findViewById(
-			// R.id.communitySelectRegion);
-			// LinearLayout ll = new LinearLayout(getActivity());
-			//
-			// LinearLayout.LayoutParams param1 = new LinearLayout.LayoutParams(
-			// LinearLayout.LayoutParams.MATCH_PARENT,
-			// LinearLayout.LayoutParams.WRAP_CONTENT);
-			//
-			// LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(
-			// LinearLayout.LayoutParams.WRAP_CONTENT,
-			// LinearLayout.LayoutParams.WRAP_CONTENT);
-			//
-			// ll.setLayoutParams(param1);
-			// ll.setOrientation(LinearLayout.HORIZONTAL);
-			// Button btn1 = new Button(getActivity());
-			// btn1.setLayoutParams(param2);
-			// btn1.setText("1호선");
-			// Button btn2 = new Button(getActivity());
-			// btn2.setLayoutParams(param2);
-			// btn2.setText("2호선");
-			//
-			// ll.addView(btn1);
-			// ll.addView(btn2);
-			//
-			// } else if (getTag().compareTo("busan") == 0) {
-			//
-			// } else if (getTag().compareTo("daegu") == 0) {
-			//
-			// } else if (getTag().compareTo("gwangju") == 0) {
-			//
-			// } else if (getTag().compareTo("daejeon") == 0) {
-			//
-			// }
-			//
-			// else {
-			//
-			// }
 
 		}
 

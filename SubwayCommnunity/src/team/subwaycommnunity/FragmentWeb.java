@@ -79,11 +79,13 @@ public class FragmentWeb extends Fragment {
 				mWebView.loadUrl("http://easytwitter.co.kr?m=y()/");
 			}
 			else if(mTag == "event"){
-				mWebView.loadUrl("http://eventstore.co.kr/");
+//				mWebView.loadUrl("http://eventstore.co.kr/");
+				mWebView.loadUrl("http://m.naver.com/");
 			}
 			
 		}
-
+		
+		
 		mWebView.setWebChromeClient(new WebChromeClient() {
 			@Override
 			public void onProgressChanged(WebView view, int newProgress) {

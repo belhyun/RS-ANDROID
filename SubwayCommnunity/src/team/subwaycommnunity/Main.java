@@ -1,6 +1,8 @@
 package team.subwaycommnunity;
 
+import team.serverdata.JSONsfromServer;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -17,9 +19,24 @@ public class Main extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		new Async().execute();
+		
 		setActionTab(savedInstanceState);
 
 	}
+	
+	
+	class Async extends AsyncTask<String, String, String>{
+		@Override
+		protected String doInBackground(String... params) {
+			
+			new JSONsfromServer();
+			return null;
+		}
+	}
+	
+	
 
 	void setActionTab(Bundle savedInstanceState) {
 		actionBar = getSupportActionBar();
