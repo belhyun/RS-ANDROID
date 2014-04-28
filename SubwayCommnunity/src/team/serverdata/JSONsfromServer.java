@@ -1,6 +1,7 @@
 package team.serverdata;
 
 import java.util.HashMap;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -18,12 +19,13 @@ public class JSONsfromServer {
 
 	public static class SubWayLine {
 		// <지역, 노선>
-		public static HashMap<String, String[]> mLine = new HashMap<String, String[]>();
+		public static HashMap<String, String[]> mLine;
 
 	}
 
 	public JSONsfromServer() {
-		getRegions(DEFAULT_URL + REGION);
+
+		getRegions(DEFAULT_URL+ REGION);
 		getLines(DEFAULT_URL + LINE);
 
 	}
@@ -40,23 +42,48 @@ public class JSONsfromServer {
 			SubWayRegion.mRegionName = new String[jArrayLen];
 
 			for (int i = 0; i < jArrayLen; i++) {
-				SubWayRegion.mRegionName[i] = jArray.getJSONObject(i).getString(
-						"name");
+				SubWayRegion.mRegionName[i] = jArray.getJSONObject(i)
+						.getString("name");
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
+
+			// final HandlerThread handlerThread = new
+			// HandlerThread("HandlerName");
+			// handlerThread.start();
+			// Handler handler = new Handler( handlerThread.getLooper() );
+			//
+			// handler.post(new Runnable() {
+			//
+			// @Override
+			// public void run() {
+			// Toast.makeText(context, "?", Toast.LENGTH_SHORT).show();
+			// }
+			// });
+			// handler.postDelayed(new Runnable() {
+			//
+			// @Override
+			// public void run() {
+			// handlerThread.quit();
+			//
+			// }
+			// }, 1000);
+			//
+			//
+			
+			// 핸들러 스레드는 건드는게 아니라고.. 생각해서..;;
 		}
 	}
 
 	void getLines(String url) {
 		HttpConnector con = new HttpConnector();
 		String result = null;
+		SubWayLine.mLine = new HashMap<String, String[]>();
 		try {
 			result = con.sendGet(url);
 			jObj = new JSONObject(result);
 
-			
 			int bodyLen = jObj.getJSONArray("body").length();
 
 			for (int i = 0; i < bodyLen; i++) {

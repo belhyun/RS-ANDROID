@@ -1,6 +1,8 @@
 package team.subwaycommnunity;
 
 import team.serverdata.JSONsfromServer;
+import team.serverdata.JSONsfromServer.SubWayLine;
+import team.serverdata.JSONsfromServer.SubWayRegion;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +23,23 @@ public class Main extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		
 		new Async().execute();
+		Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				if(SubWayLine.mLine == null){
+					Toast.makeText(getApplicationContext(), "네트워크 문제입니다....", Toast.LENGTH_SHORT).show();
+					finish();
+				}
+				if(SubWayRegion.mRegionName == null){
+					Toast.makeText(getApplicationContext(), "네트워크 문제입니다....", Toast.LENGTH_SHORT).show();
+					finish();
+				}
+				
+			}
+		}, 2000);
+		
 		
 		setActionTab(savedInstanceState);
 
@@ -34,6 +53,7 @@ public class Main extends ActionBarActivity {
 			new JSONsfromServer();
 			return null;
 		}
+		
 	}
 	
 	
